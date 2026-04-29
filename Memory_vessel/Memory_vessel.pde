@@ -27,8 +27,15 @@ float x7 = 0;
 
 //coordinates for lava particles exploding
 
-float y8 = 0;
+float y8 = 385;
 float x8 = 500;
+
+float x9 = 500;
+float y9 = 385;
+
+float y10 = 385;
+float x10 = 500;
+
 
 //track mouse pressed
 boolean justPressed = false;
@@ -39,6 +46,8 @@ void setup () {
 
 
 void draw () {
+  background(23, 48, 95);
+  
   x1 = x1 - 0.2;
   y1 = y1 + 0.65;
 
@@ -60,13 +69,41 @@ void draw () {
   y7 = y7 + 0.5;
   x7 = x7 - 0.2;
 
-  y8 = 0.000001 * (x8 - 500) * (x8 - 500);
-  x8 = x8 - 0.17;
+// particles out of top of volcano
 
+  x8 = x8 + 4;
+  y8 =  0.005 * (x8 - 760) * (x8 - 760) + 100;
+  
+  particle(x8, y8, #8d1417, 50, 2);
+  
+  if (x8 >= 1010) {
+   x8 = 500; 
+  }
+  
+  // ===================================================
+  
+  x9 = x9 - 3;
+  y9 = 0.005 * (x9 - 240) * (x9 - 240) + 100;
+  
+  particle(x9, y9, #8d1417, 0, 2.5);
 
-  println(mouseX, mouseY);
+  if (x9 <= -10) {
+   x9 = 500; 
+  }
+  
+  // ===================================================
+  
+  x10 = x10 - 5.5;
+  y10 = 0.003 * (x10 - 240) * (x10 - 240) + 250;
+  
+  particle(x10, y10, #8d1417, 240, 2.1);
 
-  background(23, 48, 95);
+  if (x10 <= -10) {
+   x10 = 500; 
+  }
+  
+  // ===================================================
+  
 
   //volcano base
   fill(25);
@@ -174,15 +211,7 @@ void draw () {
     x7 = 0;
   }
 
-  if (y8 >= 400) {
-    y8 = 0;
-    x8 = 0;
-  }
-  
-  if (justPressed == true) {
-    particle(500 + x8, y8, #8d1417, 50, 50);
     
-  }
 
 justPressed = false;
 } // end draw =======================================================================
